@@ -1,0 +1,37 @@
+
+1. Created String strBrowser = System.getProperty("browser"); inside script
+
+2. mvn test -Dbrowser=chrome 
+With above line we are passing value to browser. D denotes Maven Parameter
+System.out.println("Printing browser= " + browser);  //will print chrome
+
+
+
+
+3.In POM ,inside surefire added below tag and lines
+
+<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M4</version>
+				<configuration>		
+				
+				<systemPropertyVariables>
+				<browser>$Dbrowser</browser>        tan name does not matter
+				</systemPropertyVariables>
+				
+					
+						<suiteXmlFiles>
+						<suiteXmlFile>testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin>
+      
+    
+    4. Jenkins created choice parameter as Browser with choices  chrome,firefox
+    
+    5. Build Goal 
+    clean test -Dbrowser=$Browser
+    
+    
+    =>Result Before running jenkins build( now a parametrized one ) asks to select Browser.
